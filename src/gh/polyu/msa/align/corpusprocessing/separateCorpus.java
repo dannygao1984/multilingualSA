@@ -22,12 +22,15 @@ package gh.polyu.msa.align.corpusprocessing;
 import gh.polyu.msa.global.GLOBALPARAMETER;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -142,17 +145,18 @@ public class separateCorpus {
 	private void OutputToFile(ArrayList<String> listEngSentence, String file) {
 		// TODO Auto-generated method stub
 		try {
-			PrintWriter    pw = new PrintWriter(new FileWriter(file, true), true);
+			BufferedWriter out = 
+					new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF8"));
 			
 			for(String sent : listEngSentence)
 			{
-				pw.append(sent + "\n");
+				out.append(sent + "\n");
 			}
 		
-			if(pw != null)
+			if(out != null)
 			{
-				pw.close();
-				pw = null;
+				out.close();
+				out = null;
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
